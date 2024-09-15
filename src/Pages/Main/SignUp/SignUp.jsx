@@ -1,8 +1,57 @@
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoginInImg from "../../../assets/signin-image.jpg"
 import { FaUserTie } from "react-icons/fa";
+import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { AuthContext } from "../../../Providers/AuthProvider";
+import Swal from "sweetalert2";
+import axios from "axios";
 const SignUp = () => {
+    const { createUser, updateUserProfile } = useContext(AuthContext)
+    const { reset, register, handleSubmit, formState: { errors }, } = useForm();
+    const navigate = useNavigate();
+    const onSubmit = async (e) => {
+        const file = e.image[0]
+        if (!file) return
+        const data = new FormData();
+        data.append("file", file)
+        data.append("upload_preset", import.meta.env.VITE_upload_preset)
+        data.append("cloud_name", import.meta.env.VITE_cloud_name)
+        const response = await axios.post(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_cloud_name}/image/upload`,
+            data
+        );
+        console.log(response)
+        const image = response.e.secure_url
+        console.log(image)
+        createUser(e.email, e.password)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser)
+                updateUserProfile(e.name, e.photoURL)
+                    .then(() => {
+                        const userInfo = {
+                            name: e.name,
+                            email: e.email,
+                            photoURL: e.photoURL
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+
+            })
+            .catch(error => {
+
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Email is already use",
+                });
+            })
+        reset()
+    };
+
     return (
         <div className="h-screen lg:h-screen bg-gray-100">
             <div className="">
@@ -23,56 +72,64 @@ const SignUp = () => {
                         <div className="flex flex-col items-center">
 
                             <div className="w-full flex-1 ">
-                                <div className="mx-auto max-w-xs">
+                                <form onSubmit={handleSubmit(onSubmit)}>
+                                    <div className="mx-auto max-w-xs">
 
-                                    <input
-                                        className="w-full px-8 py-4 mt-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                                        type="text"
-                                        placeholder="User Name"
-                                    />
-                                    <input
-                                        className="w-full px-8 py-4 mt-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                                        type="email"
-                                        placeholder="Email"
-                                    />
-                                    <input
-                                        className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                                        type="password"
-                                        placeholder="Password"
-                                    />
-                                    <input
-                                        className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                                        type="password"
-                                        placeholder="Confirm Password"
-                                    />
-                                    <input
-                                        className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                                        type="file"
-                                        placeholder="Photo Upload"
-                                    />
-                                    <button className="mt-5 tracking-wide font-semibold bg-green-400 text-white-500 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
-                                        <svg
-                                            className="w-6 h-6 -ml-2"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        >
-                                            <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                                            <circle cx="8.5" cy="7" r="4" />
-                                            <path d="M20 8v6M23 11h-6" />
-                                        </svg>
-                                        <span className="ml-2">Sign In</span>
-                                    </button>
+                                        <input {...register("userName")}
+                                            className="w-full px-8 py-4 mt-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                                            type="text"
+                                            placeholder="User Name"
+                                            required
+                                        />
+                                        <input {...register("email")}
+                                            className="w-full px-8 py-4 mt-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                                            type="email"
+                                            placeholder="Email"
+                                            required
+                                        />
+                                        <input {...register("password")}
+                                            className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                                            type="password"
+                                            placeholder="Password"
+                                            required
+                                        />
+                                        <input {...register("confirmPassword")}
+                                            className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                                            type="password"
+                                            placeholder="Confirm Password"
+                                            required
+                                        />
+                                        <input {...register('image')}
+                                            className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                                            type="file"
+                                            placeholder="Photo Upload"
+                                            required
+                                        />
+                                        <button type="submit" className="mt-5 tracking-wide font-semibold bg-green-400 text-white-500 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                                            <svg
+                                                className="w-6 h-6 -ml-2"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                            >
+                                                <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                                <circle cx="8.5" cy="7" r="4" />
+                                                <path d="M20 8v6M23 11h-6" />
+                                            </svg>
+                                            <span className="ml-2">Sign In</span>
+                                        </button>
 
-                                    <p className="mt-4 text-base md:text-lg font-medium text-green-700 ">If you are already signUp please <Link to="/login" className="cursor text-rose-900 underline">login</Link> </p>
+                                        <p className="mt-4 text-base md:text-lg font-medium text-green-700 ">If you are already signUp please <Link to="/login" className="cursor text-rose-900 underline">login</Link> </p>
 
-                                    <p className="mt-6 text-xs text-gray-600 text-center">
-                                        I agree to abide by Mess Tracker Terms of Service Privacy Policy
+                                        <p className="mt-6 text-xs text-gray-600 text-center">
+                                            I agree to abide by Mess Tracker Terms of Service Privacy Policy
 
-                                    </p>
-                                </div>
+                                        </p>
+                                    </div>
+                                </form>
+
                             </div>
                         </div>
                     </div>
