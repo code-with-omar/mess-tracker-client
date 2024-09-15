@@ -7,9 +7,11 @@ import { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import axios from "axios";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 const SignUp = () => {
     const { createUser, updateUserProfile } = useContext(AuthContext)
     const { reset, register, handleSubmit, formState: { errors }, } = useForm();
+    const axiosPublic = useAxiosPublic()
     const navigate = useNavigate();
     const onSubmit = async (e) => {
         const file = e.image[0]
@@ -21,20 +23,25 @@ const SignUp = () => {
         const response = await axios.post(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_cloud_name}/image/upload`,
             data
         );
-        console.log(response)
-        const image = response.e.secure_url
-        console.log(image)
+     
+        const image = response.data.secure_url
         createUser(e.email, e.password)
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser)
-                updateUserProfile(e.name, e.photoURL)
+                updateUserProfile(e.name, image)
                     .then(() => {
                         const userInfo = {
                             name: e.name,
+                            department: e.department,
+                            district: e.district,
                             email: e.email,
-                            photoURL: e.photoURL
+                            photoURL: image
                         }
+                        console.log(userInfo)
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => { navigate('/login') })
+                            
                     })
                     .catch(error => {
                         console.log(error)
@@ -81,6 +88,19 @@ const SignUp = () => {
                                             placeholder="User Name"
                                             required
                                         />
+                                        <input {...register("department")}
+                                            className="w-full px-8 py-4 mt-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                                            type="text"
+                                            placeholder="Department in full form"
+                                            required
+                                        />
+                                        <input {...register("district")}
+                                            className="w-full px-8 py-4 mt-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                                            type="text"
+                                            placeholder="District"
+                                            required
+                                        />
+
                                         <input {...register("email")}
                                             className="w-full px-8 py-4 mt-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                                             type="email"
@@ -93,12 +113,7 @@ const SignUp = () => {
                                             placeholder="Password"
                                             required
                                         />
-                                        <input {...register("confirmPassword")}
-                                            className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                                            type="password"
-                                            placeholder="Confirm Password"
-                                            required
-                                        />
+
                                         <input {...register('image')}
                                             className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                                             type="file"
