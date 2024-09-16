@@ -7,6 +7,7 @@ import PrivateRouter from "./PrivateRoute";
 import AllMembers from "../Pages/Main/AllMembers/Allmembers";
 import AddMeals from "../Pages/Main/Addmeals/Addmeals";
 import AdminHome from "../Pages/Main/AdminHome/AdminHome";
+import Deposit from "../Pages/Main/Deposit/Deposit";
 
 export const router = createBrowserRouter([
   {
@@ -22,16 +23,20 @@ export const router = createBrowserRouter([
         element: <></>
       },
       {
-        path: "/allMembers",
+        path: "allMembers",
         element: <AllMembers></AllMembers>
       },
       {
-        path: "/addMeals",
+        path: "addMeals",
         element: <AddMeals></AddMeals>
       },
       {
         path:"admin/home",
         element:<AdminHome></AdminHome>
+      },
+      {
+        path:"admin/deposit",
+        element:<Deposit></Deposit>
       }
     ],
   },
