@@ -136,7 +136,7 @@ const SignUp = () => {
                                             <span className="ml-2">Sign In</span>
                                         </button>
 
-                                        <p className="mt-4 text-base md:text-lg font-medium text-green-700 ">If you are already signUp please <Link to="/login" className="cursor text-rose-900 underline">login</Link> </p>
+                                        <p className="mt-4 text-base md:text-lg font-medium text-green-700 ">If you are already signUp please <Link to="/login" className="cursor text-rose-900 underline uppercase">login</Link> </p>
 
                                         <p className="mt-6 text-xs text-gray-600 text-center">
                                             I agree to abide by Mess Tracker Terms of Service Privacy Policy
