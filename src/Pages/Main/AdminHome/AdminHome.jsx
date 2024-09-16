@@ -1,7 +1,11 @@
 import { TbCoinTakaFilled } from "react-icons/tb";
 import { MdFoodBank } from "react-icons/md";
+import useFindAllMeals from "../../../Hooks/useFindAllMeals";
 
 const AdminHome = () => {
+    const [allMeals]=useFindAllMeals()
+    const totalMeal = allMeals.reduce((acc, item) => parseFloat(acc) + parseFloat(item.meal), 0);
+  
     return (
         <div>
             <div className="grid md:grid-cols-3 bg-[#0f1729] my-0 md:my-10">
@@ -31,7 +35,7 @@ const AdminHome = () => {
                 <div className="border-b-2 md:border-r-2  py-5 px-5 text-[#9b8fcd]">
                     <h2 className="text-4xl font-extrabold text-center mb-5">Total meal</h2>
                     <div className="flex justify-between items-center">
-                        <MdFoodBank className="text-8xl "></MdFoodBank> <span className="text-5xl font-extrabold">120 Unit</span>
+                        <MdFoodBank className="text-8xl "></MdFoodBank> <span className="text-5xl font-extrabold">{totalMeal} Unit</span>
                     </div>
                 </div>
                 <div className="border-b-2 md:border-r-2  py-5 px-5 text-[#ff00d3]">
