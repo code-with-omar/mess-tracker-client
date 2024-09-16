@@ -1,17 +1,26 @@
 import moment from "moment";
 import useUsers from "../../../Hooks/useUsers";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const AddMeals = () => {
     const [users] = useUsers();
+    const axiosSecure = useAxiosSecure()
     const date = moment().format('L'); // "09/16/2024"
     const [month, day, year] = date.split('/');
 
-    const handleMeal = (e) => {
+    const handleMeal = async (e) => {
         e.preventDefault(); // Prevent default form submission behavior
         const form = e.target;
         const meal = form.meal.value;
         const email = form.email.value;
-        console.log(meal, email);
+        const memberMeal = {
+            email: email,
+            meal: meal,
+            date: day,
+            math: month
+        }
+        const response = await axiosSecure.post('/addMeals',memberMeal)
+        console.log(response)
 
     };
 

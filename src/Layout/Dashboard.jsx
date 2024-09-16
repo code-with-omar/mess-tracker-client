@@ -65,7 +65,7 @@ const Dashboard = () => {
                             {isAdmin ?
                                 <>
                                     <li className="mb-4">
-                                        <Link to="#" className="flex items-center py-2 text-lg md:text-xl hover:text-white hover:transition-colors">
+                                        <Link to="/admin/home" className="flex items-center py-2 text-lg md:text-xl hover:text-white hover:transition-colors">
                                             <IoMdHome className="text-lg md:text-xl mr-2" />
                                             Manager Home
                                         </Link>
