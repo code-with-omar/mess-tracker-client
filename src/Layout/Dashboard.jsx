@@ -1,5 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import { IoMdHome, IoIosWallet } from "react-icons/io";
+import { BiLogOutCircle } from "react-icons/bi";
 import { FaAd, FaCalendarAlt, FaList, FaShoppingCart, FaUsers, FaUtensils } from "react-icons/fa";
 import { VscFeedback } from "react-icons/vsc";
 import { LuCalendarClock } from "react-icons/lu";
@@ -23,7 +24,7 @@ const Dashboard = () => {
             });
 
     }
-   const date=useDate()
+    const date = useDate()
     const isAdmin = true
     return (
         <div className="min-h-screen bg-gray-100">
@@ -39,11 +40,11 @@ const Dashboard = () => {
                             <PiHamburgerFill className="w-20 h-20" />
                         </label>
                         <h1 className="text-5xl font-bold ">Mese Tracker</h1>
-                        <button onClick={()=>handleLogOut()}></button>
+
                     </div>
                     <h2 className="text-center sm:text-2xl md:text-3xl lg:text-4xl text-[#07332F] font-bold">{date}</h2>
                     <Outlet></Outlet>
-                    
+
                 </div>
 
                 {/* Sidebar / Drawer */}
@@ -52,6 +53,8 @@ const Dashboard = () => {
                     <div className="w-64 p-5 text-white font-medium h-dvh bg-[#07332F]">
                         <h1 className="text-2xl font-bold mb-8 hidden lg:block">Mese Tracker</h1>
                         <ul className="uppercase">
+                            
+                            <button className="text-6xl text-yellow-400 font-extrabold" onClick={() => handleLogOut()}><BiLogOutCircle></BiLogOutCircle></button>
                             {isAdmin ?
                                 <>
                                     <li className="mb-4">
@@ -114,7 +117,7 @@ const Dashboard = () => {
                                             <FaShoppingCart className="text-lg md:text-xl mr-2" />All member information
                                         </Link>
                                     </li>
-                                   
+
                                 </>}
                         </ul>
                     </div>
