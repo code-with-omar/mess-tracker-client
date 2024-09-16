@@ -1,7 +1,23 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoginInImg from "../../../assets/signin-image.jpg"
 import { FaUserTie } from "react-icons/fa";
+import { useContext } from "react";
+import { AuthContext } from "../../../Providers/AuthProvider";
 const Login = () => {
+    const { signIn } = useContext(AuthContext)
+    const navigate = useNavigate();
+    const handleSignIn = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                navigate('/')
+            })
+        form.reset()
+    };
     return (
         <div className="h-screen lg:h-screen bg-gray-100">
             <div className="">
@@ -19,17 +35,17 @@ const Login = () => {
                         </div>
                         <h2 className="text-xl md:text-2xl lg:text-3xl text-center text-green-900 font-extrabold py-6">Please Login First</h2>
 
-                        <div className="flex flex-col items-center">
-
-                            <div className="w-full flex-1 ">
+                        <form onSubmit={handleSignIn} className="flex flex-col items-center">
+                            <div className="w-full flex-1">
                                 <div className="mx-auto max-w-xs">
-
                                     <input
+                                        name="email" // Add this
                                         className="w-full px-8 py-4 mt-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                                         type="email"
                                         placeholder="Email"
                                     />
                                     <input
+                                        name="password" // Add this
                                         className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                                         type="password"
                                         placeholder="Password"
@@ -49,16 +65,10 @@ const Login = () => {
                                         </svg>
                                         <span className="ml-2">Sign In</span>
                                     </button>
-
-                                    <p className="mt-4 text-base md:text-lg font-medium text-green-700 ">If you are new please first <Link to="/signUp" className="cursor text-rose-900 underline">Sign Up</Link> </p>
-
-                                    <p className="mt-6 text-xs text-gray-600 text-center">
-                                        I agree to abide by Mess Tracker Terms of Service Privacy Policy
-
-                                    </p>
                                 </div>
                             </div>
-                        </div>
+                        </form>
+
                     </div>
                     <div className="flex-1 bg-green-100 text-center hidden lg:flex">
                         <div
