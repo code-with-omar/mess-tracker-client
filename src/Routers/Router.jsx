@@ -5,6 +5,7 @@ import SignUp from "../Pages/Main/SignUp/SignUp";
 import Dashboard from "../Layout/Dashboard";
 import PrivateRouter from "./PrivateRoute";
 import AllMembers from "../Pages/Main/AllMembers/Allmembers";
+import AddMeals from "../Pages/Main/Addmeals/Addmeals";
 
 export const router = createBrowserRouter([
   {
@@ -15,14 +16,18 @@ export const router = createBrowserRouter([
       </PrivateRouter>
     ),
     children: [
-    {
-      path:"/",
-      element:<></>
-    },
-    {
-      path:"/allMembers",
-      element:<AllMembers></AllMembers>
-    }
+      {
+        path: "/",
+        element: <></>
+      },
+      {
+        path: "/allMembers",
+        element: <AllMembers></AllMembers>
+      },
+      {
+        path: "/addMeals",
+        element: <AddMeals></AddMeals>
+      }
     ],
   },
   {

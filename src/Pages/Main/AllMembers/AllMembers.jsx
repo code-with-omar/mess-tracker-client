@@ -2,18 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { FaUsers } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
+import useUsers from "../../../Hooks/useUsers";
 
 const AllMembers = () => {
-    const axiosSecure = useAxiosSecure()
-    const { refetch, data: users = [] } = useQuery({
-        queryKey: ['users'],
-        queryFn: async () => {
-            const res = await axiosSecure.get('/users')
-            return res.data
-        }
-    })
-  console.log(users)
-    const handleDelete=()=>{}
+    const [users] = useUsers()
+
+    const handleDelete = () => { }
     return (
         <div>
             <div className="flex justify-between">
@@ -34,12 +28,12 @@ const AllMembers = () => {
                         </tr>
                     </thead>
                     <tbody className="text-[#737373] text-lg">
-                    {
+                        {
                             users.map((user, index) => (
                                 <tr key={user._id} className="border-b-[.5px] border-[#E8E8E8]">
                                     <td>{index + 1}</td>
                                     <td>{user.name}</td>
-                                    
+
                                     <td>Admin</td>
                                     <td className="text-right">
                                         {
