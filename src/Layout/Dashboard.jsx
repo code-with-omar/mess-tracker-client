@@ -15,6 +15,7 @@ import { AuthContext } from "../Providers/AuthProvider";
 // import useAdmin from "../Hooks/useAdmin";
 const Dashboard = () => {
     // const [isAdmin] = useAdmin()
+
     const { user, logOut } = useContext(AuthContext)
     const handleLogOut = () => {
         logOut()
@@ -24,6 +25,8 @@ const Dashboard = () => {
             });
 
     }
+    const photo = user?.photoURL
+
     const date = useDate()
     const isAdmin = true
     return (
@@ -53,8 +56,12 @@ const Dashboard = () => {
                     <div className="w-64 p-5 text-white font-medium h-dvh bg-[#07332F]">
                         <h1 className="text-2xl font-bold mb-8 hidden lg:block">Mese Tracker</h1>
                         <ul className="uppercase">
-                            
-                            <button className="text-6xl text-yellow-400 font-extrabold" onClick={() => handleLogOut()}><BiLogOutCircle></BiLogOutCircle></button>
+
+                            <div className="flex justify-between">
+                                <img src={photo} className="w-20 h-20 rounded-full" alt="" />
+                                <button className="text-6xl text-yellow-400 font-extrabold" onClick={() => handleLogOut()}><BiLogOutCircle></BiLogOutCircle></button>
+
+                            </div>
                             {isAdmin ?
                                 <>
                                     <li className="mb-4">
