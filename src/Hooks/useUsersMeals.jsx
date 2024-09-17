@@ -7,7 +7,7 @@ const useUsersMeals = ({email}) => {
     const { refetch, data: usersMeal = [] } = useQuery({
         queryKey: ['usersMeal'],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/usersFind?email=${email}`)
+            const res = await axiosSecure.get(`/usersMealFind?email=${email}`)
             return res.data
         }
     })
