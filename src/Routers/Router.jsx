@@ -8,6 +8,7 @@ import AllMembers from "../Pages/Main/AllMembers/Allmembers";
 import AddMeals from "../Pages/Main/Addmeals/Addmeals";
 import AdminHome from "../Pages/Main/AdminHome/AdminHome";
 import Deposit from "../Pages/Main/Deposit/Deposit";
+import AddBazar from "../Pages/Main/AddBazar/AddBazar";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
       {
         path:"admin/deposit",
         element:<Deposit></Deposit>
+      },
+      {
+        path:"/bazar",
+        element:<AddBazar></AddBazar>
       }
     ],
   },

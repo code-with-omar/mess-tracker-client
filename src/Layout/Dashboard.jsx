@@ -71,7 +71,7 @@ const Dashboard = () => {
                                         </Link>
                                     </li>
                                     <li className="mb-4">
-                                        <Link to="" className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors">
+                                        <Link to="/bazar" className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors">
                                             <FaUtensils className="text-lg md:text-xl mr-2" />Bazzar Cost
                                         </Link>
                                     </li>
