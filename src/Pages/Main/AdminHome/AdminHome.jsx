@@ -1,20 +1,22 @@
 import { TbCoinTakaFilled } from "react-icons/tb";
 import { MdFoodBank } from "react-icons/md";
-import useFindAllMeals from "../../../Hooks/useFindAllMeals";
-import useFindDeposit from "../../../Hooks/useFindDeposit";
-import useBazar from "../../../Hooks/useBazar";
+// import useFindAllMeals from "../../../Hooks/useFindAllMeals";
+// import useFindDeposit from "../../../Hooks/useFindDeposit";
+// import useBazar from "../../../Hooks/useBazar";
+import useCalculation from "../../../Hooks/useCalculation";
 
 const AdminHome = () => {
-    const [allMeals] = useFindAllMeals();
-    const [allDeposit] = useFindDeposit();
-    const [bazar] = useBazar()
-    const totalMeal = allMeals.reduce((acc, item) => parseFloat(acc) + parseFloat(item.meal), 0);
-    const totalDeposit = allDeposit.reduce((acc, item) => parseFloat(acc) + parseFloat(item.money), 0);
-    const totalBazar = bazar.reduce((acc, item) => parseFloat(acc) + parseFloat(item.bazar), 0);
-    const extraBazar = bazar.reduce((acc, item) => parseFloat(acc) + parseFloat(item.extra), 0);
+    // const [allMeals] = useFindAllMeals();
+    // const [allDeposit] = useFindDeposit();
+    // const [bazar] = useBazar()
+    // const totalMeal = allMeals.reduce((acc, item) => parseFloat(acc) + parseFloat(item.meal), 0);
+    // const totalDeposit = allDeposit.reduce((acc, item) => parseFloat(acc) + parseFloat(item.money), 0);
+    // const totalBazar = bazar.reduce((acc, item) => parseFloat(acc) + parseFloat(item.bazar), 0);
+    // const extraBazar = bazar.reduce((acc, item) => parseFloat(acc) + parseFloat(item.extra), 0);
 
-    const mealRate = (totalBazar / totalMeal).toFixed(2)
-    const dueAmount = totalDeposit - (totalBazar + extraBazar)
+    // const mealRate = (totalBazar / totalMeal).toFixed(2)
+    // const dueAmount = totalDeposit - (totalBazar + extraBazar)
+    const {totalMeal,totalDeposit,totalBazar,extraBazar,mealRate,dueAmount}=useCalculation()
 
     return (
         <div>
