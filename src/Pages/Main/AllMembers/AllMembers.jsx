@@ -3,6 +3,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { FaUsers } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import useUsers from "../../../Hooks/useUsers";
+import { Link } from "react-router-dom";
 
 const AllMembers = () => {
     const [users] = useUsers()
@@ -36,9 +37,15 @@ const AllMembers = () => {
 
                                     <td>Admin</td>
                                     <td className="text-right">
-                                        {
-                                            <button onClick={() => handleDelete(user._id)} className="btn btn-ghost btn-xs text-lg text-white bg-[#B91C1C] rounded-md w-12 h-12 hover:bg-white hover:text-[#B91C1C] transition-colors "><MdDeleteForever className="text-3xl "></MdDeleteForever></button>
-                                        }
+                                        <Link to={`/details/${user.email}`}>
+                                            <button
+                                                type="submit"
+                                                className="btn btn-success px-4 py-2 rounded-lg bg-gray-100 border border-gray-200  font-medium focus:outline-none focus:border-gray-400 focus:bg-white text-base md:text-lg"
+                                            >
+                                                Details
+                                                
+                                            </button>
+                                        </Link>
                                     </td>
                                 </tr>
 

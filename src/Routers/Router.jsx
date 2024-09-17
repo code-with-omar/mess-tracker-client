@@ -9,6 +9,7 @@ import AddMeals from "../Pages/Main/Addmeals/Addmeals";
 import AdminHome from "../Pages/Main/AdminHome/AdminHome";
 import Deposit from "../Pages/Main/Deposit/Deposit";
 import AddBazar from "../Pages/Main/AddBazar/AddBazar";
+import BazarDetails from "../Pages/Main/BazarDetails/BazarDetails";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +43,14 @@ export const router = createBrowserRouter([
       {
         path:"/bazar",
         element:<AddBazar></AddBazar>
+      },
+      {
+        path:"/bazarDetails",
+        element:<BazarDetails></BazarDetails>
+      },
+      {
+        path:"",
+        element:<></>
       }
     ],
   },

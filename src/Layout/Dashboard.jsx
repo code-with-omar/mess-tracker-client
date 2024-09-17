@@ -91,8 +91,8 @@ const Dashboard = () => {
                                         </Link>
                                     </li>
                                     <li className="mb-4">
-                                        <Link to="" className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors">
-                                            <MdOutlineRestaurantMenu className="text-lg md:text-xl mr-2" />Add Member
+                                        <Link to="/bazarDetails" className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors">
+                                            <MdOutlineRestaurantMenu className="text-lg md:text-xl mr-2" />Bazar Details
                                         </Link>
                                     </li>
                                 </>
