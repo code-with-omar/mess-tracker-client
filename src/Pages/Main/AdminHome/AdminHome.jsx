@@ -16,7 +16,7 @@ const AdminHome = () => {
 
     // const mealRate = (totalBazar / totalMeal).toFixed(2)
     // const dueAmount = totalDeposit - (totalBazar + extraBazar)
-    const {totalMeal,totalDeposit,totalBazar,extraBazar,mealRate,dueAmount}=useCalculation()
+    const { totalMeal, totalDeposit, totalBazar, extraBazar, mealRate, dueAmount } = useCalculation()
 
     return (
         <div>
