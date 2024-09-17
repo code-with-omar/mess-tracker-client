@@ -7,8 +7,6 @@ import { Link } from "react-router-dom";
 
 const AllMembers = () => {
     const [users] = useUsers()
-
-    const handleDelete = () => { }
     return (
         <div>
             <div className="flex justify-between">

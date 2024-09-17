@@ -10,6 +10,7 @@ import AdminHome from "../Pages/Main/AdminHome/AdminHome";
 import Deposit from "../Pages/Main/Deposit/Deposit";
 import AddBazar from "../Pages/Main/AddBazar/AddBazar";
 import BazarDetails from "../Pages/Main/BazarDetails/BazarDetails";
+import UserDetails from "../Pages/Main/UserDetails/UserDetails";
 
 export const router = createBrowserRouter([
   {
@@ -49,8 +50,9 @@ export const router = createBrowserRouter([
         element:<BazarDetails></BazarDetails>
       },
       {
-        path:"",
-        element:<></>
+        path:"/details/:email",
+        element:<UserDetails></UserDetails>,
+       
       }
     ],
   },
