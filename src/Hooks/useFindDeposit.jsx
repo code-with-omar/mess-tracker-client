@@ -7,7 +7,6 @@ const useFindDeposit = () => {
         queryKey: ['allDeposit'],
         queryFn: async () => {
             const res = await axiosSecure.get('/deposit')
-            console.log(res)
             return res.data
         }
     })
