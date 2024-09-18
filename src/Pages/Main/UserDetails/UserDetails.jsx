@@ -4,6 +4,9 @@ import useUsersDeposit from "../../../Hooks/useUsersDeposit";
 import useCalculation from "../../../Hooks/useCalculation";
 import useUsersFind from "../../../Hooks/useUsersFind";
 import { TbCoinTakaFilled } from "react-icons/tb";
+import { CiBank } from "react-icons/ci";
+import { GiHotMeal } from "react-icons/gi";
+import { AiOutlineUnderline } from "react-icons/ai";
 import useUsers from "../../../Hooks/useUsers";
 
 const UserDetails = () => {
@@ -12,13 +15,15 @@ const UserDetails = () => {
     const [usersDeposit,] = useUsersDeposit({ email })
     const [usersFind,] = useUsersFind({ email })
     const [users,] = useUsers()
-    const { extraBazar } = useCalculation()
-    
+    const { extraBazar, mealRate } = useCalculation()
+    console.log(mealRate)
     const totalUserMeals = usersMeal.reduce((acc, item) => parseFloat(acc) + parseFloat(item.meal), 0);
-    const tatalUserDeposit = usersDeposit.reduce((acc, item) => parseFloat(acc) + parseFloat(item.money), 0) || 0
+    const totalUserDeposit = usersDeposit.reduce((acc, item) => parseFloat(acc) + parseFloat(item.money), 0) || 0
     const allUsers = users.length
     const extraTakaForIndividualMember = parseFloat(extraBazar / allUsers).toFixed(2)
     const totalMealCost = parseFloat((mealRate * totalUserMeals)).toFixed(2);
+    const totalCost = parseFloat(totalMealCost) + parseFloat(extraTakaForIndividualMember)
+    const dueAmount = (totalUserDeposit - totalCost).toFixed(2)
     // console.log(totalMealCost)
     const { name, department, district, photoURL } = usersFind?.[0] || {};
     // console.log({ name, department, district, photoURL })
@@ -45,46 +50,70 @@ const UserDetails = () => {
                         <div className="grid md:grid-cols-3 bg-[#0f1729] my-0 md:my-10">
                             <div className="border-b-2 md:border-r-2 py-5 px-5 text-[#25ff00]">
                                 <h2 className="text-4xl font-extrabold text-center mb-5">Total Deposit</h2>
-                                <div className="flex justify-between items-center">
-                                    <TbCoinTakaFilled className="text-7xl" />
-                                    <span className="text-5xl font-extrabold">{tatalUserDeposit} taka</span>
+                                <div className="flex justify-center items-center font-extrabold  text-7xl mb-5 text-[#c3ff5c]">
+
+                                    <CiBank />
+                                </div>
+                                <div className="flex justify-center items-center text-5xl">
+                                    <span className="text-center font-extrabold">{totalUserDeposit}</span>
+                                    <TbCoinTakaFilled />
                                 </div>
                             </div>
                             <div className="border-b-2 md:border-r-2 py-5 px-5 text-white">
                                 <h2 className="text-4xl font-extrabold text-center mb-5">Total meals</h2>
-                                <div className="flex justify-between items-center">
-                                    <TbCoinTakaFilled className="text-8xl" />
-                                    <span className="text-5xl font-extrabold">{totalUserMeals} Units</span>
+                                <div className="flex justify-center items-center font-extrabold  text-7xl mb-5 text-[#c3ff5c]">
+
+                                    <GiHotMeal />
+                                </div>
+                                <div className="flex justify-center items-center text-5xl">
+                                    <span className="text-5xl font-extrabold">{totalUserMeals}</span>
+                                    <AiOutlineUnderline />
                                 </div>
                             </div>
-                            <div className="border-b-2 py-5 px-5 text-[#0097ff]">
+                            <div className="border-b-2 md:border-r-2 py-5 px-5  text-[#0097ff]">
                                 <h2 className="text-4xl font-extrabold text-center mb-5">Extra</h2>
-                                <div className="flex justify-between items-center">
-                                    <TbCoinTakaFilled className="text-8xl" />
-                                    <span className="text-5xl font-extrabold">{extraTakaForIndividualMember} taka</span>
+                                <div className="flex justify-center items-center font-extrabold  text-7xl mb-5 text-[#53ff3f]">
+
+                                    <CiBank />
+                                </div>
+                                <div className="flex justify-center items-center text-5xl">
+                                    <span className="text-center font-extrabold">{extraTakaForIndividualMember}</span>
+                                    <TbCoinTakaFilled />
                                 </div>
                             </div>
                         </div>
                         <div className="grid md:grid-cols-3 bg-[#0f1729] my-0 md:my-10">
-                            <div className="border-b-2 md:border-r-2 py-5 px-5 text-[#25ff00]">
+                            <div className="border-b-2 md:border-r-2 py-5 px-5 text-[#9b8fcd]">
                                 <h2 className="text-4xl font-extrabold text-center mb-5">Total Meal Cost</h2>
-                                <div className="flex justify-between items-center">
-                                    <TbCoinTakaFilled className="text-7xl" />
-                                    <span className="text-5xl font-extrabold">{totalMealCost} taka</span>
+                                <div className="flex justify-center items-center font-extrabold  text-7xl mb-5 text-[#d2ff11]">
+
+                                    <CiBank />
+                                </div>
+                                <div className="flex justify-center items-center text-5xl">
+                                    <span className="text-center font-extrabold">{totalMealCost}</span>
+                                    <TbCoinTakaFilled />
                                 </div>
                             </div>
-                            <div className="border-b-2 md:border-r-2 py-5 px-5 text-white">
-                                <h2 className="text-4xl font-extrabold text-center mb-5">Total meals</h2>
-                                <div className="flex justify-between items-center">
-                                    <TbCoinTakaFilled className="text-8xl" />
-                                    <span className="text-5xl font-extrabold">{totalUserMeals} Units</span>
+                            <div className="border-b-2 md:border-r-2 py-5 px-5 text-[#ff00d3]">
+                                <h2 className="text-4xl font-extrabold text-center mb-5">Total cost</h2>
+                                <div className="flex justify-center items-center font-extrabold  text-7xl mb-5 text-white">
+
+                                    <CiBank />
+                                </div>
+                                <div className="flex justify-center items-center text-5xl">
+                                    <span className="text-5xl font-extrabold">{totalCost}</span>
+                                    <TbCoinTakaFilled />
                                 </div>
                             </div>
-                            <div className="border-b-2 py-5 px-5 text-[#0097ff]">
-                                <h2 className="text-4xl font-extrabold text-center mb-5">Extra</h2>
-                                <div className="flex justify-between items-center">
-                                    <TbCoinTakaFilled className="text-8xl" />
-                                    <span className="text-5xl font-extrabold">{extraTakaForIndividualMember} taka</span>
+                            <div className="border-b-2 md:border-r-2 py-5 px-5  text-[#ffb80a]">
+                                <h2 className="text-4xl font-extrabold text-center mb-5">Current Status</h2>
+                                <div className="flex justify-center items-center font-extrabold  text-7xl mb-5 text-[#e65622]">
+
+                                    <CiBank />
+                                </div>
+                                <div className="flex justify-center items-center text-5xl">
+                                    <span className="text-center font-extrabold">{dueAmount}</span>
+                                    <TbCoinTakaFilled />
                                 </div>
                             </div>
                         </div>
@@ -92,7 +121,7 @@ const UserDetails = () => {
                     :
                     <h2>Loading Data....</h2>
             }
-        </div>
+        </div >
     );
 };
 

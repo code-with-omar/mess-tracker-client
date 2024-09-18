@@ -3,9 +3,10 @@ import useAxiosSecure from "./useAxiosSecure"
 const useFindAllMeals = () => {
     const axiosSecure = useAxiosSecure()
     const { refetch, data: allMeals = [] } = useQuery({
-        queryKey: ['users'],
+        queryKey: ['allMeals'],
         queryFn: async () => {
             const res = await axiosSecure.get('/membersAllMeals')
+
             return res.data
         }
     })
