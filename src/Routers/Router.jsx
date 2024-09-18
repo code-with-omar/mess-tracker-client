@@ -11,6 +11,7 @@ import Deposit from "../Pages/Main/Deposit/Deposit";
 import AddBazar from "../Pages/Main/AddBazar/AddBazar";
 import BazarDetails from "../Pages/Main/BazarDetails/BazarDetails";
 import UserDetails from "../Pages/Main/UserDetails/UserDetails";
+import MealDetails from "../Pages/Main/MealDetails/MealDetails";
 
 export const router = createBrowserRouter([
   {
@@ -34,25 +35,28 @@ export const router = createBrowserRouter([
         element: <AddMeals></AddMeals>
       },
       {
-        path:"admin/home",
-        element:<AdminHome></AdminHome>
+        path: "admin/home",
+        element: <AdminHome></AdminHome>
       },
       {
-        path:"admin/deposit",
-        element:<Deposit></Deposit>
+        path: "admin/deposit",
+        element: <Deposit></Deposit>
       },
       {
-        path:"/bazar",
-        element:<AddBazar></AddBazar>
+        path: "/bazar",
+        element: <AddBazar></AddBazar>
       },
       {
-        path:"/bazarDetails",
-        element:<BazarDetails></BazarDetails>
+        path: "/bazarDetails",
+        element: <BazarDetails></BazarDetails>
       },
       {
-        path:"/details/:email",
-        element:<UserDetails></UserDetails>,
-       
+        path: "/details/:email",
+        element: <UserDetails></UserDetails>,
+      },
+      {
+        path: "/mealDetails",
+        element: <MealDetails></MealDetails>
       }
     ],
   },

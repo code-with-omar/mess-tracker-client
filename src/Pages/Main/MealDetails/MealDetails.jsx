@@ -1,11 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { FaUsers } from "react-icons/fa";
-import { MdDeleteForever } from "react-icons/md";
-import useUsers from "../../../Hooks/useUsers";
 import { Link } from "react-router-dom";
+import useUsers from "../../../Hooks/useUsers";
 
-const AllMembers = () => {
+const MealDetails = () => {
     const [users] = useUsers()
     return (
         <div>
@@ -19,8 +15,8 @@ const AllMembers = () => {
                         <tr className="border-b-0 rounded">
                             <th>#</th>
                             <th>Name</th>
-                            <th>Rule</th>
-                            <th className="text-right">Action</th>
+                           
+                            <th className="text-right">Meal details</th>
                         </tr>
                     </thead>
                     <tbody className="text-[#737373] text-lg">
@@ -29,15 +25,13 @@ const AllMembers = () => {
                                 <tr key={user._id} className="border-b-[.5px] border-[#E8E8E8]">
                                     <td>{index + 1}</td>
                                     <td>{user.name}</td>
-
-                                    <td>Admin</td>
                                     <td className="text-right">
                                         <Link to={`/details/${user.email}`}>
                                             <button
                                                 type="submit"
                                                 className="btn btn-success px-4 py-2 rounded-lg bg-gray-100 border border-gray-200  font-medium focus:outline-none focus:border-gray-400 focus:bg-white text-base md:text-lg"
                                             >
-                                                Details
+                                                Meals details
                                                 
                                             </button>
                                         </Link>
@@ -51,7 +45,7 @@ const AllMembers = () => {
             </div>
 
         </div>
-    )
+    );
 };
 
-export default AllMembers;
+export default MealDetails;
