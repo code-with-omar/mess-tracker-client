@@ -22,7 +22,7 @@ const UserDetails = () => {
     const allUsers = users.length
     const extraTakaForIndividualMember = parseFloat(extraBazar / allUsers).toFixed(2)
     const totalMealCost = parseFloat((mealRate * totalUserMeals)).toFixed(2);
-    const totalCost = parseFloat(totalMealCost) + parseFloat(extraTakaForIndividualMember)
+    const totalCost = (parseFloat(totalMealCost) + parseFloat(extraTakaForIndividualMember)).toFixed(2)
     const dueAmount = (totalUserDeposit - totalCost).toFixed(2)
     // console.log(totalMealCost)
     const { name, department, district, photoURL } = usersFind?.[0] || {};

@@ -4,6 +4,9 @@ import { MdFoodBank } from "react-icons/md";
 // import useFindDeposit from "../../../Hooks/useFindDeposit";
 // import useBazar from "../../../Hooks/useBazar";
 import useCalculation from "../../../Hooks/useCalculation";
+import { CiBank } from "react-icons/ci";
+import { GiHotMeal } from "react-icons/gi";
+import { AiOutlineUnderline } from "react-icons/ai";
 
 const AdminHome = () => {
     // const [allMeals] = useFindAllMeals();
@@ -23,46 +26,70 @@ const AdminHome = () => {
             <div className="grid md:grid-cols-3 bg-[#0f1729] my-0 md:my-10">
                 <div className="border-b-2 md:border-r-2 py-5 px-5 text-[#25ff00]">
                     <h2 className="text-4xl font-extrabold text-center mb-5">Total Deposit</h2>
-                    <div className="flex justify-between items-center">
-                        <TbCoinTakaFilled className="text-7xl" />
-                        <span className="text-5xl font-extrabold">{totalDeposit} taka</span>
+                    <div className="flex justify-center items-center font-extrabold  text-7xl mb-5 text-[#c3ff5c]">
+
+                        <CiBank />
+                    </div>
+                    <div className="flex justify-center items-center text-5xl">
+                        <span className="text-center font-extrabold">{totalDeposit}</span>
+                        <TbCoinTakaFilled />
                     </div>
                 </div>
                 <div className="border-b-2 md:border-r-2 py-5 px-5 text-white">
                     <h2 className="text-4xl font-extrabold text-center mb-5">Total Bazar</h2>
-                    <div className="flex justify-between items-center">
-                        <TbCoinTakaFilled className="text-8xl" />
-                        <span className="text-5xl font-extrabold">{totalBazar} taka</span>
+                    <div className="flex justify-center items-center font-extrabold  text-7xl mb-5 text-[#c3ff5c]">
+
+                        <CiBank />
+                    </div>
+                    <div className="flex justify-center items-center text-5xl">
+                        <span className="text-5xl font-extrabold">{totalBazar}</span>
+                        <TbCoinTakaFilled />
                     </div>
                 </div>
-                <div className="border-b-2 py-5 px-5 text-[#0097ff]">
+                <div className="border-b-2 md:border-r-2 py-5 px-5  text-[#0097ff]">
                     <h2 className="text-4xl font-extrabold text-center mb-5">Total Extra</h2>
-                    <div className="flex justify-between items-center">
-                        <TbCoinTakaFilled className="text-8xl" />
-                        <span className="text-5xl font-extrabold">{extraBazar} taka</span>
+                    <div className="flex justify-center items-center font-extrabold  text-7xl mb-5 text-[#53ff3f]">
+
+                        <CiBank />
+                    </div>
+                    <div className="flex justify-center items-center text-5xl">
+                        <span className="text-center font-extrabold">{extraBazar}</span>
+                        <TbCoinTakaFilled />
                     </div>
                 </div>
             </div>
-            <div className="grid md:grid-cols-3 bg-[#0f1729]">
+            <div className="grid md:grid-cols-3 bg-[#0f1729] my-0 md:my-10">
                 <div className="border-b-2 md:border-r-2 py-5 px-5 text-[#9b8fcd]">
                     <h2 className="text-4xl font-extrabold text-center mb-5">Total Meal</h2>
-                    <div className="flex justify-between items-center">
-                        <MdFoodBank className="text-8xl" />
-                        <span className="text-5xl font-extrabold">{totalMeal} Unit</span>
+                    <div className="flex justify-center items-center font-extrabold  text-7xl mb-5 text-[#d2ff11]">
+
+                        <GiHotMeal />
+                    </div>
+                    <div className="flex justify-center items-center text-5xl">
+                        <span className="text-center font-extrabold">{totalMeal}</span>
+                        <AiOutlineUnderline />
                     </div>
                 </div>
                 <div className="border-b-2 md:border-r-2 py-5 px-5 text-[#ff00d3]">
                     <h2 className="text-4xl font-extrabold text-center mb-5">Meal Rate</h2>
-                    <div className="flex justify-between items-center">
-                        <MdFoodBank className="text-8xl" />
-                        <span className="text-5xl font-extrabold"> {mealRate} taka</span>
+                    <div className="flex justify-center items-center font-extrabold  text-7xl mb-5 text-white">
+
+                        <CiBank />
+                    </div>
+                    <div className="flex justify-center items-center text-5xl">
+                        <span className="text-5xl font-extrabold">{mealRate}</span>
+                        <TbCoinTakaFilled />
                     </div>
                 </div>
-                <div className="py-5 px-5 text-[#ffb80a]">
-                    <h2 className="text-4xl font-extrabold text-center mb-5">Due Amount</h2>
-                    <div className="flex justify-between items-center">
-                        <TbCoinTakaFilled className="text-8xl" />
-                        <span className="text-5xl font-extrabold">{dueAmount} taka</span>
+                <div className="border-b-2 md:border-r-2 py-5 px-5  text-[#ffb80a]">
+                    <h2 className="text-4xl font-extrabold text-center mb-5">Current Status</h2>
+                    <div className="flex justify-center items-center font-extrabold  text-7xl mb-5 text-[#e65622]">
+
+                        <CiBank />
+                    </div>
+                    <div className="flex justify-center items-center text-5xl">
+                        <span className="text-center font-extrabold">{dueAmount}</span>
+                        <TbCoinTakaFilled />
                     </div>
                 </div>
             </div>
