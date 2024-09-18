@@ -8,7 +8,7 @@ const UserMealDetails = () => {
     const month = date.split(" ")[0]
     const { email } = useParams()
     const [usersMeal, refetch] = useUsersMeals({ email })
-
+    
     return (
         <div>
             <div className="overflow-x-auto">

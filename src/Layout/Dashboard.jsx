@@ -7,11 +7,15 @@ import { PiHamburgerFill } from "react-icons/pi";
 import useDate from "../Hooks/useDate";
 import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
+import useFindLastDate from "../Hooks/useFindLastDate";
+
+import moment from 'moment';
 
 // import useAdmin from "../Hooks/useAdmin";
 const Dashboard = () => {
-    // const [isAdmin] = useAdmin()
-
+    const lastDate = useFindLastDate()
+    // const currentdate = moment().date()
+    const currentDate = 30
     const { user, logOut } = useContext(AuthContext)
     const handleLogOut = () => {
         logOut()
@@ -96,6 +100,14 @@ const Dashboard = () => {
                                             <MdOutlineRestaurantMenu className="text-lg md:text-xl mr-2" />Meal details
                                         </Link>
                                     </li>
+                                    {
+                                        currentDate === lastDate ? <li className="mb-4">
+                                            <Link to="/closeMangerActivity" className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors">
+                                                <MdOutlineRestaurantMenu className="text-lg md:text-xl mr-2" />Close Manager Activity
+                                            </Link>
+                                        </li>
+                                            : <></>
+                                    }
                                 </>
                                 :
                                 <>

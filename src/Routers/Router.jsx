@@ -13,6 +13,7 @@ import BazarDetails from "../Pages/Main/BazarDetails/BazarDetails";
 import UserDetails from "../Pages/Main/UserDetails/UserDetails";
 import MealDetails from "../Pages/Main/MealDetails/MealDetails";
 import UserMealDetails from "../Pages/Main/UserMealDetails/UserMealDetails";
+import CloseMangerActivity from "../Pages/Main/closeMangerActivity/closeMangerActivity";
 
 export const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ export const router = createBrowserRouter([
       {
         path: "/userMeal/:email",
         element: <UserMealDetails></UserMealDetails>
+      },
+      {
+        path:"/closeMangerActivity",
+        element:<CloseMangerActivity></CloseMangerActivity>
       }
     ],
   },

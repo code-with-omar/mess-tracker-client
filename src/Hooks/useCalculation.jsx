@@ -15,7 +15,6 @@ const useCalculation = () => {
     const mealRate =  (totalBazar / totalMeal).toFixed(2) 
     const dueAmount = totalDeposit - (totalBazar + extraBazar);
     
-    return {totalMeal, totalDeposit, totalBazar, extraBazar, mealRate, dueAmount};
-};
+    return {totalMeal, totalDeposit, totalBazar, extraBazar, mealRate, dueAmount}; };
 
 export default useCalculation;
