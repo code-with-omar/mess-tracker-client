@@ -35,19 +35,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "addMeals",
-        element: <AdminRoute><AddMeals></AddMeals></AdminRoute>
+        element: <AddMeals></AddMeals>
       },
       {
         path: "admin/home",
-        element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
+        element: <AdminHome></AdminHome>
       },
       {
         path: "admin/deposit",
-        element: <AdminRoute><Deposit></Deposit></AdminRoute>
+        element: <AdminRoute><Deposit></Deposit> </AdminRoute>
       },
       {
         path: "/bazar",
-        element: <AdminRoute><AddBazar></AddBazar></AdminRoute>
+        element:<AdminRoute><AddBazar></AddBazar></AdminRoute> 
       },
       {
         path: "/bazarDetails",
@@ -67,7 +67,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/closeMangerActivity",
-        element: <AdminRoute><CloseMangerActivity></CloseMangerActivity> </AdminRoute>
+        element: <CloseMangerActivity></CloseMangerActivity>
       }
     ],
   },

@@ -11,10 +11,7 @@ const PrivateRouter = ({ children }) => {
             <div className="grid grid-flow-col place-items-center h-screen w-1/6 mx-auto">
                 <progress className="progress w-56"></progress>
             </div>
-
         )
-
-
     }
     if (user) {
         return children

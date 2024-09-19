@@ -8,15 +8,17 @@ import useDate from "../Hooks/useDate";
 import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
 import useFindLastDate from "../Hooks/useFindLastDate";
-
-import moment from 'moment';
+import useAdmin from "../Hooks/useAdmin";
+import useUsersFind from "../Hooks/useUsersFind";
 
 // import useAdmin from "../Hooks/useAdmin";
 const Dashboard = () => {
     const lastDate = useFindLastDate()
+    const { user, logOut } = useContext(AuthContext)
+    const email = user.email
+    const [isAdmin,] = useAdmin({ email })
     // const currentdate = moment().date()
     const currentDate = 30
-    const { user, logOut } = useContext(AuthContext)
     const handleLogOut = () => {
         logOut()
             .then(() => { })
@@ -26,9 +28,8 @@ const Dashboard = () => {
 
     }
     const photo = user?.photoURL
-
+   
     const date = useDate()
-    const isAdmin = true
     return (
         <div className="min-h-screen bg-gray-100">
             {/* Drawer Wrapper */}
@@ -42,7 +43,7 @@ const Dashboard = () => {
                         <label htmlFor="my-drawer" className="  drawer-button lg:hidden cursor-pointer text-green-500">
                             <PiHamburgerFill className="w-20 h-20" />
                         </label>
-                        <h1 className="text-5xl font-bold ">Mese Tracker</h1>
+                        <h1 className="text-5xl font-bold ">Mess Tracker</h1>
 
                     </div>
                     <h2 className="text-center sm:text-2xl md:text-3xl lg:text-4xl text-[#07332F] font-bold">{date}</h2>
@@ -54,7 +55,7 @@ const Dashboard = () => {
                 <aside className="drawer-side">
                     <label htmlFor="my-drawer" className="drawer-overlay"></label>
                     <div className="w-64 p-5 text-white font-medium h-dvh bg-[#07332F]">
-                        <h1 className="text-2xl font-bold mb-8 hidden lg:block">Mese Tracker</h1>
+                        <h1 className="text-2xl font-bold mb-8 hidden lg:block">Mess Tracker</h1>
                         <ul className="uppercase">
 
                             <div className="flex justify-between">
