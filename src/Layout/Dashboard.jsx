@@ -9,9 +9,7 @@ import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
 import useFindLastDate from "../Hooks/useFindLastDate";
 import useAdmin from "../Hooks/useAdmin";
-import useUsersFind from "../Hooks/useUsersFind";
 
-// import useAdmin from "../Hooks/useAdmin";
 const Dashboard = () => {
     const lastDate = useFindLastDate()
     const { user, logOut } = useContext(AuthContext)
