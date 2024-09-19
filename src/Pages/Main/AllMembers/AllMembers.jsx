@@ -26,7 +26,44 @@ const AllMembers = () => {
                         if (res.data.modifiedCount > 0) {
                             Swal.fire({
                                 title: "Success!",
-                                text: `Now ${user.name} is an admin`,
+                                text: `Now ${user.name} is a manager`,
+                                icon: "success"
+                            });
+                            refetch();
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error making user admin:", error);
+                        Swal.fire({
+                            title: "Error",
+                            text: "Failed to make user admin. Please try again.",
+                            icon: "error"
+                        });
+                    });
+
+
+            }
+
+        });
+
+    }
+    const removeManager = (user) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: `You make ${user.name} as admin?`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.patch(`/users/removeAdmin/${user._id}`)
+                    .then(res => {
+                        if (res.data.modifiedCount > 0) {
+                            Swal.fire({
+                                title: "Success!",
+                                text: `Now ${user.name} is remove from manager`,
                                 icon: "success"
                             });
                             refetch();
@@ -72,7 +109,13 @@ const AllMembers = () => {
                                     <td>{user.name}</td>
                                     <td>
                                         {
-                                            user.role === 'admin' ? "Admin" : <button onClick={() => rule(user)} className="btn btn-ghost btn-xs text-lg text-white bg-[#D1A054] rounded-md w-12 h-12 hover:bg-white hover:text-[#B91C1C] transition-colors "><FaUsers className="text-3xl "></FaUsers></button>
+                                            user.role === 'admin' ? 
+                                            <>
+                                                <span>Manager </span> 
+                                                <button onClick={() => removeManager(user)} className="underline hover:text-red-950">/Remove manager</button>
+                                            </>
+                                            : 
+                                            <button onClick={() => rule(user)} className="btn btn-ghost btn-xs text-lg text-white bg-[#D1A054] rounded-md w-12 h-12 hover:bg-white hover:text-[#B91C1C] transition-colors "><FaUsers className="text-3xl "></FaUsers></button>
                                         }
 
                                     </td>
