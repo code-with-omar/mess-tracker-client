@@ -14,6 +14,7 @@ import UserDetails from "../Pages/Main/UserDetails/UserDetails";
 import MealDetails from "../Pages/Main/MealDetails/MealDetails";
 import UserMealDetails from "../Pages/Main/UserMealDetails/UserMealDetails";
 import CloseMangerActivity from "../Pages/Main/closeMangerActivity/closeMangerActivity";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -34,19 +35,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "addMeals",
-        element: <AddMeals></AddMeals>
+        element: <AdminRoute><AddMeals></AddMeals></AdminRoute>
       },
       {
         path: "admin/home",
-        element: <AdminHome></AdminHome>
+        element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
       },
       {
         path: "admin/deposit",
-        element: <Deposit></Deposit>
+        element: <AdminRoute><Deposit></Deposit></AdminRoute>
       },
       {
         path: "/bazar",
-        element: <AddBazar></AddBazar>
+        element: <AdminRoute><AddBazar></AddBazar></AdminRoute>
       },
       {
         path: "/bazarDetails",
@@ -65,8 +66,8 @@ export const router = createBrowserRouter([
         element: <UserMealDetails></UserMealDetails>
       },
       {
-        path:"/closeMangerActivity",
-        element:<CloseMangerActivity></CloseMangerActivity>
+        path: "/closeMangerActivity",
+        element: <AdminRoute><CloseMangerActivity></CloseMangerActivity> </AdminRoute>
       }
     ],
   },
