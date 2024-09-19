@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const AllMembers = () => {
-    const [users,refetch] = useUsers()
-    const axiosSecure=useAxiosSecure()
+    const [users, refetch] = useUsers()
+    const axiosSecure = useAxiosSecure()
     const rule = (user) => {
         Swal.fire({
             title: "Are you sure?",
@@ -23,16 +23,24 @@ const AllMembers = () => {
             if (result.isConfirmed) {
                 axiosSecure.patch(`/users/admin/${user._id}`)
                     .then(res => {
-                        console.log(res.data)
                         if (res.data.modifiedCount > 0) {
                             Swal.fire({
                                 title: "Success!",
-                                text: `Now ${user.name} is a admin`,
+                                text: `Now ${user.name} is an admin`,
                                 icon: "success"
                             });
-                            refetch()
+                            refetch();
                         }
                     })
+                    .catch(error => {
+                        console.error("Error making user admin:", error);
+                        Swal.fire({
+                            title: "Error",
+                            text: "Failed to make user admin. Please try again.",
+                            icon: "error"
+                        });
+                    });
+
 
             }
 
