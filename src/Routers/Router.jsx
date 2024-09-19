@@ -31,15 +31,15 @@ export const router = createBrowserRouter([
       },
       {
         path: "allMembers",
-        element: <AllMembers></AllMembers>
+        element: <AdminRoute><AllMembers></AllMembers></AdminRoute>
       },
       {
         path: "addMeals",
-        element: <AddMeals></AddMeals>
+        element: <AdminRoute><AddMeals></AddMeals></AdminRoute>
       },
       {
         path: "admin/home",
-        element: <AdminHome></AdminHome>
+        element: <AdminRoute> <AdminHome></AdminHome></AdminRoute>
       },
       {
         path: "admin/deposit",
@@ -47,7 +47,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/bazar",
-        element:<AdminRoute><AddBazar></AddBazar></AdminRoute> 
+        element: <AdminRoute><AddBazar></AddBazar></AdminRoute>
       },
       {
         path: "/bazarDetails",
@@ -67,7 +67,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/closeMangerActivity",
-        element: <CloseMangerActivity></CloseMangerActivity>
+        element: <AdminRoute><CloseMangerActivity></CloseMangerActivity></AdminRoute>
       }
     ],
   },
