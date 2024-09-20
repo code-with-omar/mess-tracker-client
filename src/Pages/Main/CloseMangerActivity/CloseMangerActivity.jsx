@@ -14,28 +14,28 @@ import { AiOutlineUnderline } from "react-icons/ai";
 
 const CloseManagerActivity = () => {
     const [closeManager, setCloseManager] = useState(false)
-
+    const [managerHistory,setManagerHistory]=useState([])
     const { totalMeal, totalDeposit, totalBazar, extraBazar, mealRate, dueAmount } = useCalculation();
     const axiosSecure = useAxiosSecure();
-    const [users, refetch] = useUsers()
-    // const lastDate = useFindLastDate()
+    const [users, refetch] = useUsers();
     const lastDate = 30
     const currentDate = 30
     // const currentDate = moment().date()
     // const dueDay = lastDate - currentDate
-    const dueDay = 10
+   
     useEffect(() => {
         axiosSecure.get('/closeManagerHistory')
             .then(res => {
                 if (res.data.length > 0) {
-                    console.log(res.data)
+                    setManagerHistory(res.data)
                     setCloseManager(true)
-
+                    refetch()
                 }
 
             })
             .catch(err => console.error(err)); // Handle errors
     }, [axiosSecure]);
+   
     const handleCookBill = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -80,7 +80,7 @@ const CloseManagerActivity = () => {
             mealRate,
             dueAmount,
         };
-        console.log(storeHistory)
+    
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -94,22 +94,18 @@ const CloseManagerActivity = () => {
                 axiosSecure.post('/closeManagerHistory', storeHistory)
                     .then(res => {
                         if (res.data.insertedId) {
-                            setCloseManager(true)
+                            setCloseManager(true);
                             Swal.fire({
                                 title: "Success!",
                                 text: "Close Manager Activity Added Successfully",
                                 icon: "success",
                             });
-
+                            // Refresh the page after a successful operation
+                            window.location.reload();
                         }
-
-                        console.log(closeManager)
-
                     })
                     .catch(err => console.error(err)); // Handle errors
-
             }
-            refetch()
         });
     };
 
@@ -187,7 +183,7 @@ const CloseManagerActivity = () => {
                                     <CiBank />
                                 </div>
                                 <div className="flex justify-center items-center text-5xl">
-                                    <span className="text-center font-extrabold">{totalDeposit}</span>
+                                    <span className="text-center font-extrabold">{managerHistory[0]?.totalDeposit}</span>
                                     <TbCoinTakaFilled />
                                 </div>
                             </div>
@@ -198,7 +194,7 @@ const CloseManagerActivity = () => {
                                     <CiBank />
                                 </div>
                                 <div className="flex justify-center items-center text-5xl">
-                                    <span className="text-5xl font-extrabold">{totalBazar}</span>
+                                    <span className="text-5xl font-extrabold">{managerHistory[0]?.totalBazar}</span>
                                     <TbCoinTakaFilled />
                                 </div>
                             </div>
@@ -209,7 +205,7 @@ const CloseManagerActivity = () => {
                                     <CiBank />
                                 </div>
                                 <div className="flex justify-center items-center text-5xl">
-                                    <span className="text-center font-extrabold">{extraBazar}</span>
+                                    <span className="text-center font-extrabold">{managerHistory[0]?.extraBazar}</span>
                                     <TbCoinTakaFilled />
                                 </div>
                             </div>
@@ -222,7 +218,7 @@ const CloseManagerActivity = () => {
                                     <GiHotMeal />
                                 </div>
                                 <div className="flex justify-center items-center text-5xl">
-                                    <span className="text-center font-extrabold">{totalMeal}</span>
+                                    <span className="text-center font-extrabold">{managerHistory[0]?.totalMeal}</span>
                                     <AiOutlineUnderline />
                                 </div>
                             </div>
@@ -233,7 +229,7 @@ const CloseManagerActivity = () => {
                                     <CiBank />
                                 </div>
                                 <div className="flex justify-center items-center text-5xl">
-                                    <span className="text-5xl font-extrabold">{mealRate}</span>
+                                    <span className="text-5xl font-extrabold">{managerHistory[0]?.mealRate}</span>
                                     <TbCoinTakaFilled />
                                 </div>
                             </div>
@@ -244,7 +240,7 @@ const CloseManagerActivity = () => {
                                     <CiBank />
                                 </div>
                                 <div className="flex justify-center items-center text-5xl">
-                                    <span className="text-center font-extrabold">{dueAmount}</span>
+                                    <span className="text-center font-extrabold">{managerHistory[0]?.dueAmount}</span>
                                     <TbCoinTakaFilled />
                                 </div>
                             </div>
