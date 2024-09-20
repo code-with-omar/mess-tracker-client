@@ -10,14 +10,20 @@ const useAxiosSecure = () => {
     const navigate = useNavigate()
     const { logOut } = useContext(AuthContext)
     //request interceptors to secure ao add authorization header for every
-    axiosSecure.interceptors.request.use(function (config) {
-        const token = localStorage.getItem('access-token')
-        config.headers.authorization = `Bearer ${token}`
-        return config
+    axiosSecure.interceptors.request.use(async function (config) {
+        // Delay fetching the token for 500ms
+        await new Promise(resolve => setTimeout(resolve, 500));
+    
+        const token = localStorage.getItem('access-token');
+        if (token) {
+            config.headers.authorization = `Bearer ${token}`;
+        }
+        
+        return config;
     }, function (error) {
-        // Do something with request error
+        // Handle request error
         return Promise.reject(error);
-    })
+    });
 
     // interceptors for 401 and 403 status
     axiosSecure.interceptors.response.use(function (response) {
