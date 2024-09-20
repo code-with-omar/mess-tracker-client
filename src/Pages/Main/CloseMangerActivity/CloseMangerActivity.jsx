@@ -11,6 +11,7 @@ import useUsers from "../../../Hooks/useUsers";
 import { TbCoinTakaFilled } from "react-icons/tb";
 import { CiBank } from "react-icons/ci";
 import { AiOutlineUnderline } from "react-icons/ai";
+import FinalCalculation from "./FinalCalculation/FinalCalculation";
 
 const CloseManagerActivity = () => {
     const [closeManager, setCloseManager] = useState(false)
@@ -245,6 +246,7 @@ const CloseManagerActivity = () => {
                                 </div>
                             </div>
                         </div>
+                        <FinalCalculation></FinalCalculation>
                     </div>
                     :
                     <></>
