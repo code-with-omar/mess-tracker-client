@@ -12,7 +12,7 @@ const useAxiosSecure = () => {
     //request interceptors to secure ao add authorization header for every
     axiosSecure.interceptors.request.use(async function (config) {
         // Delay fetching the token for 500ms
-        await new Promise(resolve => setTimeout(resolve, 10));
+        // await new Promise(resolve => setTimeout(resolve, 10));
     
         const token = localStorage.getItem('access-token');
         if (token) {

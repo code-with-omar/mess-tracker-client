@@ -2,17 +2,21 @@ import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWith
 import { app } from "../firebase/firebase.config";
 import { createContext, useEffect, useState } from "react";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+
 const auth = getAuth(app)
 export const AuthContext = createContext()
+
 const AuthProvider = ({ children }) => {
     const axiosPublic = useAxiosPublic()
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
+
     // create user with email and password 
     const createUser = (email, password) => {
         setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
+
     // update your profile
     const updateUserProfile = (name, photo) => {
         return updateProfile(auth.currentUser, {
@@ -20,39 +24,44 @@ const AuthProvider = ({ children }) => {
             photoURL: photo,
         });
     }
-    //sign in with email and password
+
+    // sign in with email and password
     const signIn = (email, password) => {
         setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
+
     // logout 
     const logOut = () => {
         setLoading(true)
         return signOut(auth)
     }
+
+    // Track user authentication state
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, currentUser => {
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             setUser(currentUser);
             if (currentUser) {
                 // Get token and store on client
                 const userInfo = { email: currentUser.email };
-                axiosPublic.post('/jwt', userInfo)
-                    .then(res => {
-                        if (res.data.token) {
-                            localStorage.setItem('access-token', res.data.token);
-                        }
-                    });
+                try {
+                    const res = await axiosPublic.post('/jwt', userInfo);
+                    if (res.data.token) {
+                        localStorage.setItem('access-token', res.data.token);
+                    }
+                } catch (error) {
+                    console.error('Failed to fetch JWT token', error);
+                }
             } else {
                 // Remove token if user is logged out
                 localStorage.removeItem('access-token');
             }
-            setLoading(false);
-
+            setLoading(false); // Move this here to ensure it only runs after token is fetched or removed
         });
-        return () => {
-            return unsubscribe();
-        }
-    }, [axiosPublic])
+
+        return () => unsubscribe();
+    }, [axiosPublic]);
+
     const authInfo = {
         user,
         loading,
@@ -61,6 +70,7 @@ const AuthProvider = ({ children }) => {
         signIn,
         logOut
     }
+
     return (
         <AuthContext.Provider value={authInfo}>
             {children}

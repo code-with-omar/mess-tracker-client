@@ -11,23 +11,31 @@ import useFindLastDate from "../Hooks/useFindLastDate";
 import useAdmin from "../Hooks/useAdmin";
 
 const Dashboard = () => {
-    const lastDate = useFindLastDate()
-    const { user, logOut } = useContext(AuthContext)
-    const email = user.email
-    const [isAdmin,] = useAdmin({ email })
-    // const currentdate = moment().date()
-    const currentDate = 30
+    const lastDate = useFindLastDate();
+    const { user, logOut } = useContext(AuthContext);
+    const email = user?.email;
+    const { isAdmin, isLoading } = useAdmin({ email }); // Destructure isAdmin and isLoading from useAdmin hook
+    const currentDate = 30;
+    const date = useDate();
+    const photo = user?.photoURL;
+
     const handleLogOut = () => {
         logOut()
             .then(() => { })
             .catch((error) => {
-                console.log(error)
+                console.log(error);
             });
+    };
 
+    if (isLoading) {
+        // Show a loading indicator while checking the admin status
+        return (
+            <div className="min-h-screen flex justify-center items-center">
+                <p className="text-2xl font-semibold">Loading...</p>
+            </div>
+        );
     }
-    const photo = user?.photoURL
-   
-    const date = useDate()
+
     return (
         <div className="min-h-screen bg-gray-100">
             {/* Drawer Wrapper */}
@@ -38,15 +46,13 @@ const Dashboard = () => {
                 <div className="drawer-content flex-1 p-6 lg:px-20">
                     {/* Navbar / Drawer Toggle Button */}
                     <div className="w-full flex justify-between lg:hidden">
-                        <label htmlFor="my-drawer" className="  drawer-button lg:hidden cursor-pointer text-green-500">
+                        <label htmlFor="my-drawer" className="drawer-button lg:hidden cursor-pointer text-green-500">
                             <PiHamburgerFill className="w-20 h-20" />
                         </label>
-                        <h1 className="text-5xl font-bold ">Mess Tracker</h1>
-
+                        <h1 className="text-5xl font-bold">Mess Tracker</h1>
                     </div>
                     <h2 className="text-center sm:text-2xl md:text-3xl lg:text-4xl text-[#07332F] font-bold">{date}</h2>
-                    <Outlet></Outlet>
-
+                    <Outlet />
                 </div>
 
                 {/* Sidebar / Drawer */}
@@ -55,13 +61,13 @@ const Dashboard = () => {
                     <div className="w-64 p-5 text-white font-medium h-dvh bg-[#07332F]">
                         <h1 className="text-2xl font-bold mb-8 hidden lg:block">Mess Tracker</h1>
                         <ul className="uppercase">
-
                             <div className="flex justify-between">
-                                <img src={photo} className="w-20 h-20 rounded-full" alt="" />
-                                <button className="text-6xl text-yellow-400 font-extrabold" onClick={() => handleLogOut()}><BiLogOutCircle></BiLogOutCircle></button>
-
+                                <img src={photo} className="w-20 h-20 rounded-full" alt="User" />
+                                <button className="text-6xl text-yellow-400 font-extrabold" onClick={handleLogOut}>
+                                    <BiLogOutCircle />
+                                </button>
                             </div>
-                            {isAdmin ?
+                            {isAdmin ? (
                                 <>
                                     <li className="mb-4">
                                         <Link to="/admin/home" className="flex items-center py-2 text-lg md:text-xl hover:text-white hover:transition-colors">
@@ -86,7 +92,7 @@ const Dashboard = () => {
                                     </li>
                                     <li className="mb-4">
                                         <Link to="/allMembers" className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors">
-                                            <FaUsers className="text-lg md:text-xl mr-2" />All Member
+                                            <FaUsers className="text-lg md:text-xl mr-2" />All Members
                                         </Link>
                                     </li>
                                     <li className="mb-4">
@@ -96,19 +102,18 @@ const Dashboard = () => {
                                     </li>
                                     <li className="mb-4">
                                         <Link to="/mealDetails" className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors">
-                                            <MdOutlineRestaurantMenu className="text-lg md:text-xl mr-2" />Meal details
+                                            <MdOutlineRestaurantMenu className="text-lg md:text-xl mr-2" />Meal Details
                                         </Link>
                                     </li>
-                                    {
-                                        currentDate === lastDate ? <li className="mb-4">
+                                    {currentDate === lastDate && (
+                                        <li className="mb-4">
                                             <Link to="/closeMangerActivity" className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors">
                                                 <MdOutlineRestaurantMenu className="text-lg md:text-xl mr-2" />Close Manager Activity
                                             </Link>
                                         </li>
-                                            : <></>
-                                    }
+                                    )}
                                 </>
-                                :
+                            ) : (
                                 <>
                                     <li className="mb-4">
                                         <Link to="#" className="flex items-center py-2 text-lg md:text-xl hover:text-white hover:transition-colors">
@@ -123,7 +128,7 @@ const Dashboard = () => {
                                     </li>
                                     <li className="mb-4">
                                         <Link to="#" className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors">
-                                            <IoIosWallet className="text-lg md:text-xl mr-2" />Meal details
+                                            <IoIosWallet className="text-lg md:text-xl mr-2" />Meal Details
                                         </Link>
                                     </li>
                                     <li className="mb-4">
@@ -133,11 +138,11 @@ const Dashboard = () => {
                                     </li>
                                     <li className="mb-4">
                                         <Link to="" className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors">
-                                            <FaShoppingCart className="text-lg md:text-xl mr-2" />All member information
+                                            <FaShoppingCart className="text-lg md:text-xl mr-2" />All Member Information
                                         </Link>
                                     </li>
-
-                                </>}
+                                </>
+                            )}
                         </ul>
                     </div>
                 </aside>

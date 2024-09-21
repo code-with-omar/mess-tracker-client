@@ -11,7 +11,7 @@ import useUsers from "../../../Hooks/useUsers";
 import { TbCoinTakaFilled } from "react-icons/tb";
 import { CiBank } from "react-icons/ci";
 import { AiOutlineUnderline } from "react-icons/ai";
-import FinalCalculation from "./FinalCalculation/FinalCalculation";
+import FinalCalculation from "../CloseMangerActivity/FinalCalculation/FinalCalculation";
 
 const CloseManagerActivity = () => {
     const [closeManager, setCloseManager] = useState(false)
@@ -20,7 +20,7 @@ const CloseManagerActivity = () => {
     const axiosSecure = useAxiosSecure();
     const [users, refetch] = useUsers();
     const lastDate = 30
-    const currentDate = 30
+    const currentDate = 20
     // const currentDate = moment().date()
     // const dueDay = lastDate - currentDate
    
@@ -249,7 +249,7 @@ const CloseManagerActivity = () => {
                         <FinalCalculation></FinalCalculation>
                     </div>
                     :
-                    <></>
+                    <><h2>Loading...</h2></>
             }
 
         </div>
