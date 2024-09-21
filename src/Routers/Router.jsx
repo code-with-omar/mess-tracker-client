@@ -15,6 +15,7 @@ import MealDetails from "../Pages/Main/MealDetails/MealDetails";
 import UserMealDetails from "../Pages/Main/UserMealDetails/UserMealDetails";
 import CloseMangerActivity from "../Pages/Main/closeMangerActivity/closeMangerActivity";
 import AdminRoute from "./AdminRoute";
+import UserProfile from "../Pages/Main/UserProfile/UserProfile";
 
 export const router = createBrowserRouter([
   {
@@ -27,7 +28,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <></>
+        element: <h2>Welcome to mess tracker</h2>
+      },
+      {
+        path:'/userProfile',
+        element:<UserProfile></UserProfile>
       },
       {
         path: "allMembers",

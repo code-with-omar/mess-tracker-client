@@ -116,29 +116,29 @@ const Dashboard = () => {
                             ) : (
                                 <>
                                     <li className="mb-4">
-                                        <Link to="#" className="flex items-center py-2 text-lg md:text-xl hover:text-white hover:transition-colors">
+                                        <Link to="/userProfile" className="flex items-center py-2 text-lg md:text-xl hover:text-white hover:transition-colors">
                                             <IoMdHome className="text-lg md:text-xl mr-2" />
                                             Home
                                         </Link>
                                     </li>
                                     <li className="mb-4">
-                                        <Link to="" className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors">
-                                            <FaCalendarAlt className="text-lg md:text-xl mr-2" /> Profile
+                                        <Link
+                                            to={`/userMeal/${user.email}`}
+                                            className="flex py-2 items-center text-lg md:text-xl hover:text-white transition-colors"
+                                        >
+                                            <IoIosWallet className="text-lg md:text-xl mr-2" />
+                                            Meal Details
+                                        </Link>
+                                    </li>
+
+                                    <li className="mb-4">
+                                        <Link to="/bazarDetails" className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors">
+                                            <FaShoppingCart className="text-lg md:text-xl mr-2" />Details Bazar
                                         </Link>
                                     </li>
                                     <li className="mb-4">
-                                        <Link to="#" className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors">
-                                            <IoIosWallet className="text-lg md:text-xl mr-2" />Meal Details
-                                        </Link>
-                                    </li>
-                                    <li className="mb-4">
-                                        <Link to="" className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors">
-                                            <FaShoppingCart className="text-lg md:text-xl mr-2" />Manager Review
-                                        </Link>
-                                    </li>
-                                    <li className="mb-4">
-                                        <Link to="" className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors">
-                                            <FaShoppingCart className="text-lg md:text-xl mr-2" />All Member Information
+                                        <Link to="/previousMonth" className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors">
+                                            <FaShoppingCart className="text-lg md:text-xl mr-2" />Previous Month
                                         </Link>
                                     </li>
                                 </>
