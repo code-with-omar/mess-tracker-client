@@ -20,7 +20,7 @@ const CloseManagerActivity = () => {
     const axiosSecure = useAxiosSecure();
     const [users, refetch] = useUsers();
     const lastDate = 30
-    const currentDate = 20
+    const currentDate = 30
     // const currentDate = moment().date()
     // const dueDay = lastDate - currentDate
    
@@ -249,7 +249,7 @@ const CloseManagerActivity = () => {
                         <FinalCalculation></FinalCalculation>
                     </div>
                     :
-                    <><h2>Loading...</h2></>
+                    <></>
             }
 
         </div>
