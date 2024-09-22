@@ -3,46 +3,71 @@ import useUsers from "../../../../Hooks/useUsers";
 import useUserHistory from "../../../../Hooks/useUserHistory";
 import useFindManagerHistory from "../../../../Hooks/useFindManagerHistory";
 import useCookBill from "../../../../Hooks/useCookBill";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const FinalCalculation = () => {
+    const axiosSecure = useAxiosSecure();
     const [managerHistory, refetch] = useFindManagerHistory();
-    const [cookBill,] = useCookBill()
-
+    const [cookBill] = useCookBill();
     const [users] = useUsers();
     const [userEmail, setUserEmail] = useState(null);
     const [deposit, meal] = useUserHistory(userEmail);
-    const managerData = managerHistory && managerHistory[0];
-    if (managerData) {
-        const totalMeal = parseFloat(managerData.totalMeal);
-        const totalCookBill = parseFloat(cookBill[0].cookBill)
 
-        const userCookBill = (totalCookBill / users.length).toFixed(2)
+    const handleCalculation = async (email) => {
+        await setUserEmail(email);
+
+    };
+
+    if (managerHistory && managerHistory.length > 0 && userEmail) {
+        const managerData = managerHistory[0];
+        const totalMeal = parseFloat(managerData.totalMeal);
+        const totalCookBill = parseFloat(cookBill[0]?.cookBill || 0);
+
+        const userCookBill = (totalCookBill / users.length).toFixed(2);
         const extraBazar = parseFloat((parseFloat(managerData.extraBazar) / users.length).toFixed(2));
         const mealRate = parseFloat(managerData.mealRate);
-        console.log({ mealRate });
 
         if (deposit && meal) {
-            console.log({ totalCookBill })
-            console.log({ extraBazar })
-            console.log({ mealRate });
             const depositTotal = deposit.reduce((acc, item) => acc + parseFloat(item.money), 0) || 0;
-            console.log({ depositTotal })
-            const userTotalMeal = meal.reduce((acc, item) => parseFloat(acc) + parseFloat(item.meal), 0);
-            console.log({ userTotalMeal })
+            const userTotalMeal = meal.reduce((acc, item) => acc + parseFloat(item.meal), 0);
             const mealCost = userTotalMeal * mealRate;
-            console.log({ mealCost })
             const totalUserCost = (mealCost + extraBazar + parseFloat(userCookBill)).toFixed(2);
-            console.log({ totalUserCost })
-            const dueAmount = (depositTotal - totalUserCost).toFixed(2)
-            console.log({ dueAmount })
+            const dueAmount = (depositTotal - totalUserCost).toFixed(2);
 
+            const userPerviousMonthHistory = {
+                email: userEmail,
+                depositTotal,
+                userTotalMeal,
+                totalCookBill,
+                mealCost,
+                totalUserCost,
+                dueAmount,
+            };
 
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, close it!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axiosSecure.post("/userPreviousMonth", userPerviousMonthHistory).then((res) => {
+                        if (res.data.insertedId) {
+                            Swal.fire({
+                                title: "Success!",
+                                text: "User meal closed successfully.",
+                                icon: "success",
+                            });
+                        }
+                    });
+                }
+            });
         }
     }
-
-    const handleCalculation = (email) => {
-        setUserEmail(email);
-    };
 
     return (
         <div>
@@ -51,7 +76,7 @@ const FinalCalculation = () => {
             </h2>
             <div className="overflow-x-auto">
                 <table className="table mt-5 md:mt-10">
-                    {/* head */}
+                    {/* Table header */}
                     <thead className="bg-[#D1A054] text-white text-lg font-semibold">
                         <tr className="border-b-0 rounded">
                             <th>#</th>

@@ -1,20 +1,36 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import moment from "moment";
 
 const AddBazar = () => {
     const { reset, register, handleSubmit, formState: { errors }, } = useForm();
-    const axiosSecure=useAxiosSecure()
+    const axiosSecure = useAxiosSecure()
+    const date = moment().format('L'); 
+    const [month, day, year] = date.split('/');
+    
     const onSubmit = async (e) => {
 
-        const bazarCost={
-            name:e.name,
-            bazar:e.bazar,
-            details:e.details,
-            extra:e.extra
+        const bazarCost = {
+            name: e.name,
+            bazar: e.bazar,
+            details: e.details,
+            extra: e.extra,
+            bazarDate: day
+
         }
-        const res= await axiosSecure.post('/bazar',bazarCost)
-        console.log(res)
+        console.log(bazarCost)
+        const res = await axiosSecure.post('/bazar', bazarCost)
+        if(res.data.insertedId){
+            Swal.fire({
+                icon: "success",
+                title: "Meal add success",
+                showConfirmButton: false,
+                timer: 1500
+              });
+              reset()
+        }
     }
     return (
         <div>

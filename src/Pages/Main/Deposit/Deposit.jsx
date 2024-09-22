@@ -34,7 +34,7 @@ const Deposit = () => {
                axiosSecure.post('/deposit',deposit)
                .then(response=>console.log(response))
                 Swal.fire({
-                    title: "Deleted!",
+                    title: "Success!",
                     text: "Deposit success",
                     icon: "success"
                 });

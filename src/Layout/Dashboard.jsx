@@ -1,21 +1,22 @@
 import { Link, Outlet } from "react-router-dom";
 import { IoMdHome, IoIosWallet } from "react-icons/io";
-import { BiLogOutCircle } from "react-icons/bi";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { FaAd, FaCalendarAlt, FaList, FaShoppingCart, FaUsers, FaUtensils } from "react-icons/fa";
 import { MdOutlineRestaurantMenu } from "react-icons/md";
 import { PiHamburgerFill } from "react-icons/pi";
 import useDate from "../Hooks/useDate";
 import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
-import useFindLastDate from "../Hooks/useFindLastDate";
+import logout from "../../src/assets/images.png"
 import useAdmin from "../Hooks/useAdmin";
 
 const Dashboard = () => {
-    const lastDate = useFindLastDate();
+
+
     const { user, logOut } = useContext(AuthContext);
     const email = user?.email;
     const { isAdmin, isLoading } = useAdmin({ email }); // Destructure isAdmin and isLoading from useAdmin hook
-    const currentDate = 30;
+
     const date = useDate();
     const photo = user?.photoURL;
 
@@ -46,12 +47,12 @@ const Dashboard = () => {
                 <div className="drawer-content flex-1 p-6 lg:px-20">
                     {/* Navbar / Drawer Toggle Button */}
                     <div className="w-full flex justify-between lg:hidden">
-                        <label htmlFor="my-drawer" className="drawer-button lg:hidden cursor-pointer text-green-500">
-                            <PiHamburgerFill className="w-20 h-20" />
+                        <label htmlFor="my-drawer" className="drawer-button lg:hidden cursor-pointer text-[#07332F]">
+                            <GiHamburgerMenu className="w-12 h-12" />
                         </label>
-                        <h1 className="text-5xl font-bold">Mess Tracker</h1>
+                        <h1 className="text-2xl text-[#07332f] font-extrabold">Mess Tracker</h1>
                     </div>
-                    <h2 className="text-center sm:text-2xl md:text-3xl lg:text-4xl text-[#07332F] font-bold">{date}</h2>
+                    <h2 className="text-center my-5 md:my-0  sm:text-2xl md:text-3xl lg:text-4xl text-[#07332F] font-bold">{date}</h2>
                     <Outlet />
                 </div>
 
@@ -61,10 +62,10 @@ const Dashboard = () => {
                     <div className="w-64 p-5 text-white font-medium h-dvh bg-[#07332F]">
                         <h1 className="text-2xl font-bold mb-8 hidden lg:block">Mess Tracker</h1>
                         <ul className="uppercase">
-                            <div className="flex justify-between">
+                            <div className="flex justify-between mb-5">
                                 <img src={photo} className="w-20 h-20 rounded-full" alt="User" />
                                 <button className="text-6xl text-yellow-400 font-extrabold" onClick={handleLogOut}>
-                                    <BiLogOutCircle />
+                                    <img src={logout} className="w-20 h-20" alt="" />
                                 </button>
                             </div>
                             {isAdmin ? (
@@ -105,13 +106,13 @@ const Dashboard = () => {
                                             <MdOutlineRestaurantMenu className="text-lg md:text-xl mr-2" />Meal Details
                                         </Link>
                                     </li>
-                                    {currentDate === lastDate && (
-                                        <li className="mb-4">
-                                            <Link to="/closeMangerActivity" className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors">
-                                                <MdOutlineRestaurantMenu className="text-lg md:text-xl mr-2" />Close Manager Activity
-                                            </Link>
-                                        </li>
-                                    )}
+
+                                    <li className="mb-4">
+                                        <Link to="/closeMangerActivity" className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors">
+                                            <MdOutlineRestaurantMenu className="text-lg md:text-xl mr-2" />Close Manager Activity
+                                        </Link>
+                                    </li>
+
                                 </>
                             ) : (
                                 <>

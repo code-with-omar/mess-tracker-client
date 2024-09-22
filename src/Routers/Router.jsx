@@ -16,6 +16,8 @@ import UserMealDetails from "../Pages/Main/UserMealDetails/UserMealDetails";
 import CloseMangerActivity from "../Pages/Main/closeMangerActivity/closeMangerActivity";
 import AdminRoute from "./AdminRoute";
 import UserProfile from "../Pages/Main/UserProfile/UserProfile";
+import PreviousMath from "../Pages/Main/PreviousMath/PreviousMath";
+import Welcome from "../Pages/Main/Welcome/Welcome";
 
 export const router = createBrowserRouter([
   {
@@ -28,7 +30,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h2>Welcome to mess tracker</h2>
+        element: <Welcome></Welcome>
       },
       {
         path:'/userProfile',
@@ -73,6 +75,10 @@ export const router = createBrowserRouter([
       {
         path: "/closeMangerActivity",
         element: <AdminRoute><CloseMangerActivity></CloseMangerActivity></AdminRoute>
+      },
+      {
+        path:'/previousMonth',
+        element:<PreviousMath></PreviousMath>
       }
     ],
   },

@@ -19,10 +19,9 @@ const CloseManagerActivity = () => {
     const { totalMeal, totalDeposit, totalBazar, extraBazar, mealRate, dueAmount } = useCalculation();
     const axiosSecure = useAxiosSecure();
     const [users, refetch] = useUsers();
-    const lastDate = 30
-    const currentDate = 30
-    // const currentDate = moment().date()
-    // const dueDay = lastDate - currentDate
+    const lastDate=useFindLastDate()
+    const currentDate = moment().date()
+    const dueDay = lastDate - currentDate
    
     useEffect(() => {
         axiosSecure.get('/closeManagerHistory')
@@ -162,11 +161,11 @@ const CloseManagerActivity = () => {
                         </>
                     ) : (
                         <div>
-                            {/* {dueDay > 0 && (
+                            {dueDay > 0 && (
                                 <h2 className="text-center text-warning mt-5 font-bold text-lg md:text-xl lg:text-2xl">
                                     After {dueDay} days, your manager post will be finished.
                                 </h2>
-                            )} */}
+                            )}
                         </div>
                     )
                 

@@ -1,6 +1,7 @@
 import moment from "moment";
 import useUsers from "../../../Hooks/useUsers";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const AddMeals = () => {
     const [users] = useUsers();
@@ -19,8 +20,16 @@ const AddMeals = () => {
             date: day,
             math: month
         }
+        
         const response = await axiosSecure.post('/addMeals',memberMeal)
-        console.log(response)
+        if(response.data.insertedId){
+            Swal.fire({
+                icon: "success",
+                title: "Meal add success",
+                showConfirmButton: false,
+                timer: 1500
+              });
+        }
 
     };
 

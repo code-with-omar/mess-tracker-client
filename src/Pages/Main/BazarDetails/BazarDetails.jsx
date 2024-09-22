@@ -22,7 +22,7 @@ const BazarDetails = () => {
                             bazar.map((userId, index) => (
                                 <tr key={userId?._id} className="border-b-[.5px] border-[#E8E8E8]">
                                     <td>{index + 1}</td>
-                                    <td>{1}</td>
+                                    <td>{userId?.bazarDate}</td>
                                     <td>{userId?.bazar} Taka</td>
                                     <td className="text-right">{userId?.extra} Taka</td>
                                 </tr>
