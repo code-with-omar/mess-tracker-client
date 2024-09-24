@@ -7,9 +7,9 @@ import moment from "moment";
 const AddBazar = () => {
     const { reset, register, handleSubmit, formState: { errors }, } = useForm();
     const axiosSecure = useAxiosSecure()
-    const date = moment().format('L'); 
+    const date = moment().format('L');
     const [month, day, year] = date.split('/');
-    
+
     const onSubmit = async (e) => {
 
         const bazarCost = {
@@ -22,14 +22,14 @@ const AddBazar = () => {
         }
         console.log(bazarCost)
         const res = await axiosSecure.post('/bazar', bazarCost)
-        if(res.data.insertedId){
+        if (res.data.insertedId) {
             Swal.fire({
                 icon: "success",
-                title: "Meal add success",
+                title: "Bazar add success",
                 showConfirmButton: false,
                 timer: 1500
-              });
-              reset()
+            });
+            reset()
         }
     }
     return (
