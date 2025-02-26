@@ -1,6 +1,12 @@
 import { Link, Outlet } from "react-router-dom";
 import { IoMdHome, IoIosWallet } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { PiHandDepositThin } from "react-icons/pi";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { GiHotMeal } from "react-icons/gi";
+import { IoLockClosedOutline } from "react-icons/io5";
+import { TbDetails } from "react-icons/tb";
+
 import {
   FaAd,
   FaCalendarAlt,
@@ -56,9 +62,9 @@ const Dashboard = () => {
               htmlFor="my-drawer"
               className="drawer-button lg:hidden cursor-pointer text-[#07332F]"
             >
-              <GiHamburgerMenu className="w-12 h-12" />
+              <GiHamburgerMenu className="w-8 h-8 md:w-10 md:h-10" />
             </label>
-            <h1 className="text-2xl text-[#07332f] font-extrabold">
+            <h1 className="text-xl md:text-2xl text-[#07332f] font-extrabold">
               Mess Tracker
             </h1>
           </div>
@@ -76,17 +82,21 @@ const Dashboard = () => {
               Mess Tracker
             </h1>
             <ul className="uppercase">
-              <div className="flex justify-between mb-5">
+              <div className="flex justify-between items-center mb-5 ">
                 <img
                   src={photo}
                   className="w-20 h-20 rounded-full"
                   alt="User"
                 />
                 <button
-                  className="text-6xl text-yellow-400 font-extrabold"
+                  className="text-6xl text-yellow-400 font-extrabold  w-12 h-12 md:w-20 md:h-20 "
                   onClick={handleLogOut}
                 >
-                  <img src={logout} className="w-20 h-20" alt="" />
+                  <img
+                    src={logout}
+                    className="w-12 h-12 md:w-20 md:h-20 "
+                    alt=""
+                  />
                 </button>
               </div>
               {isAdmin ? (
@@ -100,33 +110,7 @@ const Dashboard = () => {
                       Manager Home
                     </Link>
                   </li>
-                  <li className="mb-4">
-                    <Link
-                      to="/bazar"
-                      className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors"
-                    >
-                      <FaUtensils className="text-lg md:text-xl mr-2" />
-                      Bazzar Cost
-                    </Link>
-                  </li>
-                  <li className="mb-4">
-                    <Link
-                      to="/admin/deposit"
-                      className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors"
-                    >
-                      <FaList className="text-lg md:text-xl mr-2" />
-                      Deposit
-                    </Link>
-                  </li>
-                  <li className="mb-4">
-                    <Link
-                      to="/addMeals"
-                      className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors"
-                    >
-                      <FaAd className="text-lg md:text-xl mr-2" />
-                      Today's Meals
-                    </Link>
-                  </li>
+
                   <li className="mb-4">
                     <Link
                       to="/allMembers"
@@ -138,10 +122,29 @@ const Dashboard = () => {
                   </li>
                   <li className="mb-4">
                     <Link
+                      to="/bazar"
+                      className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors"
+                    >
+                      <AiOutlineShoppingCart className="text-lg md:text-xl mr-2" />
+                      Today's Bazzar
+                    </Link>
+                  </li>
+
+                  <li className="mb-4">
+                    <Link
+                      to="/addMeals"
+                      className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors"
+                    >
+                      <GiHotMeal className="text-lg md:text-xl mr-2" />
+                      Today's Meals
+                    </Link>
+                  </li>
+                  <li className="mb-4">
+                    <Link
                       to="/bazarDetails"
                       className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors"
                     >
-                      <MdOutlineRestaurantMenu className="text-lg md:text-xl mr-2" />
+                      <TbDetails className="text-lg md:text-xl mr-2" />
                       Bazar Details
                     </Link>
                   </li>
@@ -150,8 +153,17 @@ const Dashboard = () => {
                       to="/mealDetails"
                       className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors"
                     >
-                      <MdOutlineRestaurantMenu className="text-lg md:text-xl mr-2" />
+                      <GiHotMeal className="text-lg md:text-xl mr-2" />
                       Meal Details
+                    </Link>
+                  </li>
+                  <li className="mb-4">
+                    <Link
+                      to="/admin/deposit"
+                      className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors"
+                    >
+                      <PiHandDepositThin className="text-lg md:text-xl mr-2" />
+                      Deposit
                     </Link>
                   </li>
 
@@ -160,8 +172,8 @@ const Dashboard = () => {
                       to="/closeMangerActivity"
                       className="flex py-2 text-lg md:text-xl items-center hover:text-white hover:transition-colors"
                     >
-                      <MdOutlineRestaurantMenu className="text-lg md:text-xl mr-2" />
-                      Close Manager Activity
+                      <IoLockClosedOutline className="text-lg md:text-xl mr-2" />
+                      Close Management
                     </Link>
                   </li>
                 </>
