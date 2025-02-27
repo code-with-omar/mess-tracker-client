@@ -7,16 +7,7 @@ import { GiHotMeal } from "react-icons/gi";
 import { IoLockClosedOutline } from "react-icons/io5";
 import { TbDetails } from "react-icons/tb";
 
-import {
-  FaAd,
-  FaCalendarAlt,
-  FaList,
-  FaShoppingCart,
-  FaUsers,
-  FaUtensils,
-} from "react-icons/fa";
-import { MdOutlineRestaurantMenu } from "react-icons/md";
-import { PiHamburgerFill } from "react-icons/pi";
+import { FaShoppingCart, FaUsers } from "react-icons/fa";
 import useDate from "../Hooks/useDate";
 import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
